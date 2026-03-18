@@ -32,6 +32,8 @@ public class ARMachineController : MonoBehaviour
             {
                 _spawnedMachine = Instantiate(machinePrefab, trackedImage.transform);
                 SectionManager.Instance.ShowOverview();
+
+                Debug.Log("Object Spawned");
             }
         }
 

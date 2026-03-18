@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class ComponentLabel : MonoBehaviour
 {
@@ -8,24 +9,20 @@ public class ComponentLabel : MonoBehaviour
     public ComponentLabelData data;
 
     [Header("References")]
-    public Transform targetPoint;      // titik di komponen yang dituju arrow
     public Transform labelAnchor;      // posisi label card di world space
 
     [Header("UI References")]
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI specText;
-    public GameObject labelCard;
+    private GameObject labelCard;
 
     [Header("Line Settings")]
-    public LineRenderer lineRenderer;
     public LineRenderer[] lineRenderers;
-    public Transform[] targetPoints;
-    public int curveResolution = 20;
-    public float curveHeight = 0.05f;  // tinggi kurva bezier
+    private List<Transform> targetPoints = new();
 
     [Header("Arrow Settings")]
     public GameObject arrowHeadPrefab;  // prefab cone/triangle kecil
-    private GameObject _arrowInstance;
+    private GameObject[] _arrowInstances;
 
     private Camera _arCamera;
     private Canvas _canvas;
@@ -34,6 +31,7 @@ public class ComponentLabel : MonoBehaviour
     {
         _arCamera = Camera.main;
         _canvas = GetComponentInParent<Canvas>();
+        labelCard = labelAnchor.gameObject;
 
         if (data != null)
         {
@@ -41,14 +39,29 @@ public class ComponentLabel : MonoBehaviour
             specText.text = data.specifications;
         }
 
-        SetupLineRenderer();
+        // Setup line renderer
+        for (int i = 0; i < lineRenderers.Length; i++)
+        {
+            targetPoints.Add(lineRenderers[i].transform);
+            SetupLineRenderers(lineRenderers[i]);
+        }
 
-        if (arrowHeadPrefab != null)
-            _arrowInstance = Instantiate(arrowHeadPrefab, targetPoint.position, Quaternion.identity, transform);
+        // Spawn arrow hanya saat Play Mode
+            _arrowInstances = new GameObject[lineRenderers.Length];
+            for (int i = 0; i < lineRenderers.Length; i++)
+            {
+                if (arrowHeadPrefab != null && i < targetPoints.Count && _arrowInstances[i] == null)
+                    _arrowInstances[i] = Instantiate(arrowHeadPrefab, targetPoints[i].position,
+                                                     Quaternion.identity, transform);
+            }
+        
     }
 
     void Update()
     {
+        if (_arCamera == null)
+            _arCamera = Camera.main;
+
         // Billboard label card
         if (_arCamera != null)
         {
@@ -57,60 +70,39 @@ public class ComponentLabel : MonoBehaviour
                 _arCamera.transform.rotation * Vector3.up);
         }
 
-        // Update bezier line setiap frame
-        // karena posisi bisa berubah saat AR tracking
-        //DrawBezierLine();
-        DrawStraightLine();
+        DrawStraightLines();
     }
 
-    void SetupLineRenderer()
+    void SetupLineRenderers(LineRenderer lr)
     {
-        if (lineRenderer == null) return;
+        if (lr == null) return;
 
-        lineRenderer.positionCount = 2;
-        //lineRenderer.positionCount = curveResolution; // Curve
-        lineRenderer.useWorldSpace = true;
-        lineRenderer.startWidth = 0.002f;
-        lineRenderer.endWidth = 0.002f;
-
-        // Material line putih
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startColor = Color.white;
-        lineRenderer.endColor = Color.white;
+        lr.positionCount = 2;
+        lr.useWorldSpace = true;
+        lr.startWidth = 0.003f;
+        lr.endWidth = 0.003f;
+        lr.material = new Material(Shader.Find("Sprites/Default"));
+        lr.startColor = Color.white;
+        lr.endColor = Color.white;
     }
 
-    void DrawStraightLine()
+    void DrawStraightLines()
     {
-        if (lineRenderer == null || targetPoint == null || labelAnchor == null) return;
-
-        lineRenderer.SetPosition(0, labelAnchor.position);
-        lineRenderer.SetPosition(1, targetPoint.position);
-
-        if (_arrowInstance != null)
+        for (int i = 0; i < lineRenderers.Length; i++)
         {
-            _arrowInstance.transform.position = targetPoint.position;
+            if (lineRenderers[i] == null || i >= targetPoints.Count || targetPoints[i] == null) continue;
 
-            Vector3 direction = targetPoint.position - labelAnchor.position;
-            if (direction != Vector3.zero)
-                _arrowInstance.transform.rotation = Quaternion.LookRotation(direction);
-        }
-    }
+            lineRenderers[i].SetPosition(0, labelAnchor.position);
+            lineRenderers[i].SetPosition(1, targetPoints[i].position);
 
-    void DrawBezierLine()
-    {
-        if (lineRenderer == null || targetPoint == null || labelAnchor == null) return;
+            if (_arrowInstances != null && i < _arrowInstances.Length && _arrowInstances[i] != null)
+            {
+                _arrowInstances[i].transform.position = targetPoints[i].position;
 
-        Vector3 start = labelAnchor.position;
-        Vector3 end = targetPoint.position;
-
-        // Control point untuk kurva — di tengah, diangkat ke atas
-        Vector3 mid = (start + end) / 2f;
-        mid += Vector3.up * curveHeight;
-
-        for (int i = 0; i < curveResolution; i++)
-        {
-            float t = i / (float)(curveResolution - 1);
-            lineRenderer.SetPosition(i, CalculateQuadraticBezier(start, mid, end, t));
+                Vector3 direction = targetPoints[i].position - labelAnchor.position;
+                if (direction != Vector3.zero)
+                    _arrowInstances[i].transform.rotation = Quaternion.LookRotation(direction);
+            }
         }
     }
 

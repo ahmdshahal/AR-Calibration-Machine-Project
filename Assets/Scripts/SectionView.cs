@@ -9,6 +9,7 @@ public class SectionView : MonoBehaviour
     public GameObject meshRoot;        // parent semua mesh section ini
     public GameObject hotspotObject;   // floating button GO
     public GameObject animationRoot;
+    public GameObject labelRoot;
     public Animator[] animators;       // animator untuk flow arrow, dll
     public SectionLabelGroup labelGroup;
 
@@ -34,6 +35,8 @@ public class SectionView : MonoBehaviour
             if (visible) labelGroup.ShowAllLabels();
             else labelGroup.HideAllLabels();
         }
+
+        labelRoot.SetActive(visible);
     }
 
     public void PlayAnimation()

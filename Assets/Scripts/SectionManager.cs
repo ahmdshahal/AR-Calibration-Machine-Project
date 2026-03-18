@@ -36,6 +36,7 @@ public class SectionManager : MonoBehaviour
             s.SetVisible(true);
             s.SetAnimation(true);
             s.SetHotspot(true);
+            s.SetLabel(false);
         }
     }
 
@@ -52,12 +53,14 @@ public class SectionManager : MonoBehaviour
             s.SetVisible(false);
             s.SetHotspot(false);
             s.SetAnimation(false);
+            s.SetLabel(false);
         }
 
         // Show section yang dipilih
         _activeSection = section;
         _activeSection.SetVisible(true);
         _activeSection.SetAnimation(true);
+        _activeSection.SetLabel(true);
         //_activeSection.PlayAnimation();
 
         //PopupUI.Instance.Show(_activeSection.data);
