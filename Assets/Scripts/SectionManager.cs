@@ -10,6 +10,10 @@ public class SectionManager : MonoBehaviour
     [Header("Settings")]
     public float fadeSpeed = 0.3f;
 
+    [Header("Button")]
+    public GameObject backSectionButton;
+    public GameObject backMainMenuButton;
+
     private SectionView _activeSection;
     private bool _isOverview = true;
 
@@ -38,6 +42,10 @@ public class SectionManager : MonoBehaviour
             s.SetHotspot(true);
             s.SetLabel(false);
         }
+
+        // Button
+        backSectionButton.SetActive(false);
+        backMainMenuButton.SetActive(true);
     }
 
     public void SelectSection(SectionView section)
@@ -62,6 +70,10 @@ public class SectionManager : MonoBehaviour
         _activeSection.SetAnimation(true);
         _activeSection.SetLabel(true);
         //_activeSection.PlayAnimation();
+
+        // Button
+        backSectionButton.SetActive(true);
+        backMainMenuButton.SetActive(false);
 
         //PopupUI.Instance.Show(_activeSection.data);
     }
