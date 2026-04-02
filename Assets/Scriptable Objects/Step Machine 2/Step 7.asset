@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0958c0d04b14c0e46b22c6b46dd90226, type: 3}
+  m_Name: Step 7
+  m_EditorClassIdentifier: 
+  stepNumber: 7
+  stepTitle: Data Monitoring and Recording
+  stepDescription: "Record all readings using the Data Recorder on the control panel.\r\nThe
+    Data Recorder displays the following parameters:\r\no REF1\r\nReference value
+    from the Level Transmitter (Reference Unit)\r\no UUT1\r\nMeasurement value from
+    the Unit Under Test (Level Transmitter)\r\no UUT1 Bypass\r\nMeasurement value
+    from the UUT bypass line\r\no PT1\r\nPressure Transmitter reading (if applicable)\n\r\nRecord
+    all readings for:\r\no All 5 calibration points (0% \u2013 100%)\r\no All 3 runs
+    (increasing, decreasing, increasing)"

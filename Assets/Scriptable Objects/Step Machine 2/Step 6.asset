@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0958c0d04b14c0e46b22c6b46dd90226, type: 3}
+  m_Name: Step 6
+  m_EditorClassIdentifier: 
+  stepNumber: 6
+  stepTitle: Tank System Operation
+  stepDescription: "The level rig consists of two tanks:\r\n\u2022 Storage Tank (source
+    tank)\r\n\u2022 Calibration Tank (measurement tank)\n\r\nOperation Logic:\r\nAt
+    0% level setpoint:\r\no No water flows from the storage tank to the calibration
+    tank.\n\r\nAt 25%, 50%, 75%, and 100% setpoints:\r\no Water flows from the storage
+    tank into the calibration tank.\r\no The inflow continues until the target level
+    (%) is achieved in the calibration tank."
