@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
+//[ExecuteAlways]
 public class ComponentLabel : MonoBehaviour
 {
     [Header("Data")]

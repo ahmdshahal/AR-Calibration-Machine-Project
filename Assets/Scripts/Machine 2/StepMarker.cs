@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class StepMarker : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class StepMarker : MonoBehaviour
 
     [Header("References")]
     public TMP_Text numberText;         // World Space TMP, tampilkan angka
-    public GameObject labelArrowRoot;      // World Space label + arrow, default hidden
+    public GameObject[] labelArrowRoot;      // World Space label + arrow, default hidden
+    public GameObject[] targetPointLabels;
     public ComponentLabel componentLabel;  // reuse script label yang sudah ada
 
     private Camera _arCamera;
+    private Button _button;
     private bool _isActive = false;
 
     public static StepMarker CurrentActive { get; private set; }
@@ -24,7 +27,10 @@ public class StepMarker : MonoBehaviour
             numberText.text = $"Step {data.stepNumber}";
 
         if (labelArrowRoot != null)
-            labelArrowRoot.SetActive(false);
+            LabelActivator(false);
+
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnTap);
     }
 
     void Update()
@@ -52,10 +58,12 @@ public class StepMarker : MonoBehaviour
 
         // Show label arrow
         if (labelArrowRoot != null)
-            labelArrowRoot.SetActive(true);
+            LabelActivator(true);
 
         // Show overlay buttons
         StepOverlayUI.Instance?.ShowStepOverlay(data);
+
+        StepMarkerGroup.Instance?.HideMarkers();
     }
 
     public void Deactivate()
@@ -63,7 +71,7 @@ public class StepMarker : MonoBehaviour
         _isActive = false;
 
         if (labelArrowRoot != null)
-            labelArrowRoot.SetActive(false);
+            LabelActivator(false);
     }
 
     public void OnBack()
@@ -71,5 +79,19 @@ public class StepMarker : MonoBehaviour
         Deactivate();
         CurrentActive = null;
         StepOverlayUI.Instance?.HideStepOverlay();
+        StepMarkerGroup.Instance?.ShowAllMarkers();
+    }
+
+    public void LabelActivator(bool active)
+    {
+        foreach(var label in labelArrowRoot)
+        {
+            label.SetActive(active);
+        }
+
+        foreach(var target in targetPointLabels)
+        {
+            target.SetActive(active);
+        }
     }
 }

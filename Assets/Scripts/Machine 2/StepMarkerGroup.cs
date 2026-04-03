@@ -28,4 +28,10 @@ public class StepMarkerGroup : MonoBehaviour
 
         StepOverlayUI.Instance?.HideStepOverlay();
     }
+
+    public void HideMarkers()
+    {
+        foreach (var marker in stepMarkers)
+            marker.gameObject.SetActive(false);
+    }
 }
