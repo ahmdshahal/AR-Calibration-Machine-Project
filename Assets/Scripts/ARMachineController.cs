@@ -26,11 +26,20 @@ public class ARMachineController : MonoBehaviour
 
     void OnTrackedImagesChanged(ARTrackablesChangedEventArgs<ARTrackedImage> args)
     {
+        Camera mainCam = Camera.main;
+
         foreach (var trackedImage in args.added)
         {
             if (_spawnedMachine == null)
             {
-                _spawnedMachine = Instantiate(machinePrefab, trackedImage.transform);
+                _spawnedMachine = Instantiate(machinePrefab, trackedImage.transform.position, trackedImage.transform.rotation * Quaternion.Euler(0, 180, 0));
+
+                /*if (mainCam != null)
+                {
+                    Vector3 lookPos = mainCam.transform.position - _spawnedMachine.transform.position;
+                    lookPos.y = 0;
+                    _spawnedMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+                }*/
                 SectionManager.Instance.ShowOverview();
 
                 Debug.Log("Object Spawned");
@@ -42,7 +51,14 @@ public class ARMachineController : MonoBehaviour
             if (_spawnedMachine != null)
                 _spawnedMachine.transform.SetPositionAndRotation(
                     trackedImage.transform.position,
-                    trackedImage.transform.rotation);
+                    trackedImage.transform.rotation * Quaternion.Euler(0, 180, 0));
+
+            /*if (mainCam != null)
+            {
+                Vector3 lookPos = mainCam.transform.position - _spawnedMachine.transform.position;
+                lookPos.y = 0;
+                _spawnedMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+            }*/
         }
     }
 }

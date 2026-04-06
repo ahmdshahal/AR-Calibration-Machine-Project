@@ -29,6 +29,14 @@ public class StepMarkerGroup : MonoBehaviour
         StepOverlayUI.Instance?.HideStepOverlay();
     }
 
+    public void ShowAllLabels(bool active)
+    {
+        foreach(var marker in stepMarkers)
+        {
+            marker.LabelActivator(active);
+        }
+    }
+
     public void HideMarkers()
     {
         foreach (var marker in stepMarkers)
