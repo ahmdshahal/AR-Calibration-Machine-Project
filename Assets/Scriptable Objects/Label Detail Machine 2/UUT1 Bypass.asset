@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2da2dd5269cbbc49898722278a6311c, type: 3}
+  m_Name: UUT1 Bypass
+  m_EditorClassIdentifier: 
+  componentName: UUT1 Bypass
+  specifications: (Unit Under Test)
+  description: These instruments display the water level in their respective tanks.
+    The combined readings from both UUT1 and UUT2 provide the total volume of water
+    across the two tanks.

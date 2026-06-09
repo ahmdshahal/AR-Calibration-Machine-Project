@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2da2dd5269cbbc49898722278a6311c, type: 3}
+  m_Name: Start Button
+  m_EditorClassIdentifier: 
+  componentName: Start Button
+  specifications: 
+  description: Press the START push button to initiate automatic operation. The AUTO
+    SYSTEM indicator will flash, followed by illumination of the PUMP RUN indicator,
+    confirming that the system is operating under the configured parameters.

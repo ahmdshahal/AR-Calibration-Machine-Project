@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2da2dd5269cbbc49898722278a6311c, type: 3}
+  m_Name: REF1
+  m_EditorClassIdentifier: 
+  componentName: REF1
+  specifications: (E+H FMR51-134B/0)
+  description: 'These radar level transmitters monitor the water level between Tank
+    1 and Tank 2, corresponding to the setpoint on the control panel (Level Controller).
+    Each sensor has a maximum
+
+    measurement range of 25 meters and is capable
+    of detecting the water level down to the tank bottom. The total water volume
+    (QT) across both tanks can be calculated as:
+
+    
+
+    QT=Tank 1 level (REF1)+Tank
+    2 level (REF2)'
