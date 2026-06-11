@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1615e62d183cb4d8a5a1d91e2e6951, type: 3}
+  m_Name: PAM1
+  m_EditorClassIdentifier: 
+  documents:
+  - documentName: Groundfos PAM 1
+    documentFiles:
+    - {fileID: 21300000, guid: f4280fb61dda3fd418b41e7667cae107, type: 3}
+    - {fileID: 21300000, guid: 0c656d45265ce77439e95f60c15aff4f, type: 3}
